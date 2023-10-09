@@ -1,2 +1,5 @@
-package com.example.fictiveprojectmanagement.model;public enum Priority {
+package com.example.fictiveprojectmanagement.model;
+
+public enum Priority {
+    HIGH, MEDIUM, LOW
 }

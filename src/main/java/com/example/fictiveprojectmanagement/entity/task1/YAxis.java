@@ -1,2 +1,8 @@
-package com.example.fictiveprojectmanagement.entity.task1;public class YAxis {
+package com.example.fictiveprojectmanagement.entity.task1;
+
+import lombok.Data;
+
+@Data
+public class YAxis {
+     String type;
 }

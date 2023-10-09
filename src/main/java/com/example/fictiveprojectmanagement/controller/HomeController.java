@@ -1,6 +1,6 @@
-package controller;
+package com.example.fictiveprojectmanagement.controller;
 
-import model.LoginDto;
+import com.example.fictiveprojectmanagement.model.LoginDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

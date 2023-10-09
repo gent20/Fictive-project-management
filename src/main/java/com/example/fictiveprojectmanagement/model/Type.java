@@ -1,2 +1,5 @@
-package com.example.fictiveprojectmanagement.model;public enum TaskType {
+package com.example.fictiveprojectmanagement.model;
+
+public enum Type {
+    TASK, NOTE, ATTACHMENT
 }
