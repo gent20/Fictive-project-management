@@ -2,28 +2,31 @@ package com.example.fictiveprojectmanagement.service;
 
 import com.example.fictiveprojectmanagement.entity.Project;
 import com.example.fictiveprojectmanagement.repository.ProjectRepository;
+import com.example.fictiveprojectmanagement.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProjectServiceImpl {
+public class ProjectService {
 
     private final ProjectRepository projectRepository;
+    private final TaskRepository taskRepository;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository){
+    public ProjectService(ProjectRepository projectRepository, TaskRepository taskRepository) {
         this.projectRepository = projectRepository;
+        this.taskRepository = taskRepository;
     }
 
-    public List<Project> getAllProjects(){
-        List<Project> rootProjects = projectRepository.findAllRoots(); // first db call
+    public List<Project> getAllProjects() {
+        List<Project> rootProjects = projectRepository.findAllRoots();
+        rootProjects.forEach(project -> project.setItems(taskRepository.findTaskByProject(project.getId())));
 
-        // Now Find all the subcategories
         List<Long> rootProjectIds = rootProjects.stream().map(Project::getId).toList();
-        List<Project> subProjects = projectRepository.findAllSubCategoriesInRoot(rootProjectIds); // second db call
+        List<Project> subProjects = projectRepository.findAllSubProjectsInRoot(rootProjectIds);
 
-        subProjects.forEach(subCategory ->
-                subCategory.getParentProject().getChildren().add(subCategory)); // no further db call, because everyone inside the root is in the persistence context.
+        subProjects.forEach(subProject -> subProject.setItems((taskRepository.findTaskByProject(subProject.getId()))));
+        subProjects.forEach(subCategory -> subCategory.getParentProject().getChildren().add(subCategory));
 
         return rootProjects;
     }

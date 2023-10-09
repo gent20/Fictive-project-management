@@ -1,2 +1,7 @@
-package com.example.fictiveprojectmanagement.service;public class ProductService {
+package com.example.fictiveprojectmanagement.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class ProductService {
 }
