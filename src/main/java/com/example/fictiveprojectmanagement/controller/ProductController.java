@@ -25,15 +25,15 @@ public class ProductController {
     }
 
     @GetMapping("/products/firstTask")
-    public List<FirstTask> getTask1(){
+    public List<FirstTask> getFirstTask(){
         return productRepository.getFirstTask();
     }
     @GetMapping("/products/secondTask")
-    public List<SecondTask> getTask2(){
+    public List<SecondTask> getSecondTask(){
         return productRepository.getSecondTask();
     }
     @GetMapping("/products/thirdTask")
-    public List<ThirdTask> getTask3(){
+    public List<ThirdTask> getThirdTask(){
         return productRepository.getThirdTask();
     }
 }
