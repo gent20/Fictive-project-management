@@ -1,6 +1,7 @@
 package com.fictiveprojectmanagement.service;
 
 import com.fictiveprojectmanagement.entity.Project;
+import com.fictiveprojectmanagement.entity.Role;
 import com.fictiveprojectmanagement.repository.ProjectRepository;
 import com.fictiveprojectmanagement.repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,11 @@ public class ProjectService {
         subProjects.forEach(subCategory -> subCategory.getParentProject().getChildren().add(subCategory));
 
         return rootProjects;
+    }
+
+    public void assignRoleToProject(Project project, Role role) {
+        project.getAllowedRoles().add(role);
+        projectRepository.save(project);
     }
 }
 

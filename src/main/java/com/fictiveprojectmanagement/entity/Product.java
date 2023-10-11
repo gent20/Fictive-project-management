@@ -10,10 +10,10 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class Product {
-
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
+
     private String dateTime;
     private int channelCode;
     private String transactionId;

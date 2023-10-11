@@ -3,6 +3,7 @@ package com.fictiveprojectmanagement.service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.fictiveprojectmanagement.entity.Role;
 import com.fictiveprojectmanagement.entity.User;
 import com.fictiveprojectmanagement.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,12 +21,17 @@ public class UserDetail implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    public void assignRoleToUser(User user, Role role) {
+        user.getRoles().add(role);
+        userRepository.save(user);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByUsernameOrEmail(username, username);
 
         if(user.isEmpty()){
-            throw new UsernameNotFoundException("User not exists by Username");
+            throw new UsernameNotFoundException("User not found!");
         }
 
         Set<GrantedAuthority> authorities = user.get().getRoles().stream()

@@ -1,4 +1,4 @@
-package com.fictiveprojectmanagement.model.aggregateTasks;
+package com.fictiveprojectmanagement.model.aggregatetasks;
 
 import java.util.ArrayList;
 

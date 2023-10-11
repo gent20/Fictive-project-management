@@ -1,6 +1,7 @@
 package com.fictiveprojectmanagement.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 
 import java.util.Set;
@@ -14,6 +15,7 @@ public class User extends BaseEntity {
     private String username;
 
     @Column(nullable = false, unique = true)
+    @Email
     private String email;
 
     @Column(nullable = false)

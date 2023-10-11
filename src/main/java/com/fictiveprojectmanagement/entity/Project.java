@@ -2,17 +2,15 @@ package com.fictiveprojectmanagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 public class Project extends BaseEntity {
     private String name;
 
@@ -29,6 +27,10 @@ public class Project extends BaseEntity {
     @JoinColumn(name = "root_project_id")
     @JsonIgnore
     private Project rootProject;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Role> allowedRoles = new HashSet<>();
 
     @Transient
     private List<Project> children = new ArrayList<>();
