@@ -21,11 +21,6 @@ public class UserDetail implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    public void assignRoleToUser(User user, Role role) {
-        user.getRoles().add(role);
-        userRepository.save(user);
-    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByUsernameOrEmail(username, username);
@@ -39,5 +34,10 @@ public class UserDetail implements UserDetailsService {
                 .collect(Collectors.toSet());
 
         return new org.springframework.security.core.userdetails.User(username,user.get().getPassword(),authorities);
+    }
+
+    public void assignRoleToUser(User user, Role role) {
+        user.getRoles().add(role);
+        userRepository.save(user);
     }
 }
